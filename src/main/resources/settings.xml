@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+
+    <!-- 本地仓库的路径。默认值为${user.home}/.m2/repository。 -->
+    <localRepository>${user.home}/.m2/repository</localRepository>
+
+    <!--Maven是否需要和用户交互以获得输入。如果Maven需要和用户交互以获得输入，则设置成true，反之则应为false。默认为true。 -->
+    <interactiveMode>true</interactiveMode>
+
+    <!--Maven是否需要使用plugin-registry.xml文件来管理插件版本。 如果需要让Maven使用文件${user.home}/.m2/plugin-registry.xml来管理插件版本，则设为true。默认为false。 -->
+    <usePluginRegistry>false</usePluginRegistry>
+
+    <!--表示Maven是否需要在离线模式下运行。如果构建系统需要在离线模式下运行，则为true，默认为false。 当由于网络设置原因或者安全因素，构建服务器不能连接远程仓库的时候，该配置就十分有用。 -->
+    <offline>false</offline>
+
+    <!--降低中央仓库负荷，提供IO访问效率，加速maven构建，节省网络资源 <mirrors> <mirror> <id>nexus</id>
+        <mirrorOf>*</mirrorOf> <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </mirror> <mirror> <id>nexus-public-snapshots</id> <mirrorOf>public-snapshots</mirrorOf>
+        <url>http://maven.aliyun.com/nexus/content/repositories/snapshots/</url>
+        </mirror> </mirrors> -->
+
+
+    <!-- 根据环境参数来调整构建配置的列表 -->
+    <profiles>
+        <profile>
+            <id>nexus</id>
+            <repositories>
+                <repository>
+                    <id>maven-central</id>
+                    <url>http://172.16.200.16/repository/maven-central/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </repository>
+            </repositories>
+            <pluginRepositories>
+                <pluginRepository>
+                    <id>maven-central</id>
+                    <url>http://172.16.200.16/repository/maven-central/</url>
+                    <releases>
+                        <enabled>true</enabled>
+                    </releases>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+
+    <!-- 激活使用 -->
+    <activeProfiles>
+        <activeProfile>nexus</activeProfile>
+    </activeProfiles>
+
+</settings>
