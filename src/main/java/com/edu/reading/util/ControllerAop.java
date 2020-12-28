@@ -20,7 +20,7 @@ public class ControllerAop {
 	@Autowired  
 	private HttpServletRequest request; 
 	
-	@Around(value = "execution(public * com.reignwood.evaluate.controller.*Controller.*(..))")
+	@Around(value = "execution(public * com.edu.reading.*Controller.*(..))")
 	public Object userAop(ProceedingJoinPoint jp) throws Throwable {
 		System.out.println("拦截到了" + jp.getSignature().getName() +"方法..."); 
 		String userId = request.getHeader("userid");

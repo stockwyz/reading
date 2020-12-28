@@ -29,7 +29,7 @@ public class InsertAop {
 	@Autowired
 	private CachedUidGenerator generator;
 
-	@Around(value = "execution(public * com.reignwood.evaluate..*.*Mapper.insert*(..))")
+	@Around(value = "execution(public * com.edu.reading..*.*Mapper.insert*(..))")
 	public Object selectAop(ProceedingJoinPoint jp) {
 		Object result = null;
 		try {

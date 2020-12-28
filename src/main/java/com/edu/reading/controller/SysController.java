@@ -2,30 +2,34 @@ package com.edu.reading.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.edu.reading.common.result.ResultBuilder;
 import com.edu.reading.common.result.model.RestResult;
-import com.edu.reading.util.HttpUtil;
+import com.edu.reading.service.SysService;
 
 @RestController
 @RequestMapping("sys")
 public class SysController extends BaseController {
-	// @Autowired
-	// private DingService dingService;
-	//
+	@Autowired
+	private SysService sysService;
 
 	private Logger logger = LoggerFactory.getLogger(SysController.class);
 	
 
 	@GetMapping("/openid")
-	public void getAccessToken() {
-		System.out.println(HttpUtil.doGet("https://api.weixin.qq.com/sns/jscode2session?appid=wxee10d2f412a62daa&secret=0bd2eb25d25323a3519a08e3328a6d74&js_code=051GLPkl2N6id641qQll2FiAUa4GLPkx&grant_type=authorization_code"));
-			
-//		System.out.println(HttpUtil.doGet("https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=wxee10d2f412a62daa&secret=0bd2eb25d25323a3519a08e3328a6d74"));
+	public RestResult<String> getOpenid(@RequestParam String code) {
+		try {
+			return ResultBuilder.buildSuccessResult("获取OpenId成功", sysService.wechatSession(code));
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResultBuilder.buildErrorResult("获取OpenId失败:" + e.getMessage());
+		}
 	}
 	// @GetMapping("/openid")
 	// public RestResult<String> getOpenId(@RequestParam("code") String code) {
@@ -78,11 +82,4 @@ public class SysController extends BaseController {
 	public RestResult<? extends Object> visitor() {
 		return ResultBuilder.buildSuccessResult("1.0");
 	}
-
-	// @PostMapping("/tree/org-emp")
-	// @ResponseBody
-	// public RestResult<List<SysDept>> orgEmpTree() {
-	//
-	// }
-
 }

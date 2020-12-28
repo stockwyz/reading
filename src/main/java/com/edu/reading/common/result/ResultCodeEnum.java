@@ -9,6 +9,7 @@ public enum ResultCodeEnum implements IResultCode {
      * common code
      **/
     SUCCESS(200, "处理成功"),
+    EMPTY(201, "无数据"),
     XXXX(600, "自定义错误"),
     ERROR(500, "服务器内部错误"),
     ;
