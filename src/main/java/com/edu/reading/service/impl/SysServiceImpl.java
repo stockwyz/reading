@@ -58,9 +58,10 @@ public class SysServiceImpl implements SysService {
 				if(userList.size() == 0) {
 					User user = new User();
 					user.setOpenid(openid);
-					user.setCreateUser(1L);
 					user.setCreateDate(new Date());
 					userMapper.insertSelective(user);
+					user.setCreateUser(user.getId());
+					userMapper.updateByPrimaryKeySelective(user);
 				} else {
 					User user = userList.get(0);
 					user.setUpdateUser(1L);

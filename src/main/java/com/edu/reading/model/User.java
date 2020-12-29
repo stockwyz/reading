@@ -42,7 +42,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
-    private Integer gendar;
+    private String gendar;
 
     /**
      * 个性签名

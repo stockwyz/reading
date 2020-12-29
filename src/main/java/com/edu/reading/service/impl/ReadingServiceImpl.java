@@ -1,5 +1,6 @@
 package com.edu.reading.service.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,4 +38,28 @@ public class ReadingServiceImpl implements ReadingService {
 		return result;
 	}
 
+	@Override
+	public Map<String, Object> home(String openId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer updatePersonInfo(User user) {
+		UserExample ue = new UserExample();
+		if(user.getId() == null) {
+			ue.createCriteria().andOpenidEqualTo(user.getOpenid());
+			List<User> lst = userMapper.selectByExample(ue);
+			if(!ObjectUtils.isEmpty(lst)) {
+				user.setUpdateUser(lst.get(0).getId());
+			}			
+		} else {
+			user.setUpdateUser(user.getId());
+		}
+
+		user.setUpdateDate(new Date());
+		UserExample ex = new UserExample();
+		ex.createCriteria().andOpenidEqualTo(user.getOpenid());
+		return userMapper.updateByExampleSelective(user, ex);
+	}
 }

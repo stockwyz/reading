@@ -7,7 +7,7 @@
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-    <result column="gendar" jdbcType="INTEGER" property="gendar" />
+    <result column="gendar" jdbcType="VARCHAR" property="gendar" />
     <result column="motto" jdbcType="VARCHAR" property="motto" />
     <result column="score" jdbcType="INTEGER" property="score" />
     <result column="study_level" jdbcType="INTEGER" property="studyLevel" />
@@ -119,7 +119,7 @@
       create_user, create_date, update_user, 
       update_date)
     values (#{id,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{nickname,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gendar,jdbcType=INTEGER}, 
+      #{name,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{gendar,jdbcType=VARCHAR}, 
       #{motto,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, #{studyLevel,jdbcType=INTEGER}, 
       #{type,jdbcType=INTEGER}, #{schoolId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, 
       #{createUser,jdbcType=BIGINT}, #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, 
@@ -194,7 +194,7 @@
         #{avatar,jdbcType=VARCHAR},
       </if>
       <if test="gendar != null">
-        #{gendar,jdbcType=INTEGER},
+        #{gendar,jdbcType=VARCHAR},
       </if>
       <if test="motto != null">
         #{motto,jdbcType=VARCHAR},
@@ -253,7 +253,7 @@
         avatar = #{record.avatar,jdbcType=VARCHAR},
       </if>
       <if test="record.gendar != null">
-        gendar = #{record.gendar,jdbcType=INTEGER},
+        gendar = #{record.gendar,jdbcType=VARCHAR},
       </if>
       <if test="record.motto != null">
         motto = #{record.motto,jdbcType=VARCHAR},
@@ -297,7 +297,7 @@
       nickname = #{record.nickname,jdbcType=VARCHAR},
       name = #{record.name,jdbcType=VARCHAR},
       avatar = #{record.avatar,jdbcType=VARCHAR},
-      gendar = #{record.gendar,jdbcType=INTEGER},
+      gendar = #{record.gendar,jdbcType=VARCHAR},
       motto = #{record.motto,jdbcType=VARCHAR},
       score = #{record.score,jdbcType=INTEGER},
       study_level = #{record.studyLevel,jdbcType=INTEGER},
@@ -328,7 +328,7 @@
         avatar = #{avatar,jdbcType=VARCHAR},
       </if>
       <if test="gendar != null">
-        gendar = #{gendar,jdbcType=INTEGER},
+        gendar = #{gendar,jdbcType=VARCHAR},
       </if>
       <if test="motto != null">
         motto = #{motto,jdbcType=VARCHAR},
@@ -369,7 +369,7 @@
       nickname = #{nickname,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       avatar = #{avatar,jdbcType=VARCHAR},
-      gendar = #{gendar,jdbcType=INTEGER},
+      gendar = #{gendar,jdbcType=VARCHAR},
       motto = #{motto,jdbcType=VARCHAR},
       score = #{score,jdbcType=INTEGER},
       study_level = #{studyLevel,jdbcType=INTEGER},
