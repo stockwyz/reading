@@ -92,6 +92,16 @@ public class Book  extends BaseModel implements Serializable {
      * @mbggenerated
      */
     private String content;
+    
+    /**
+     * 1.数学 2.语文
+     */
+    private Integer subject;
+    
+    /**
+     * 1.课本 2绘本
+     */
+    private Integer type;
 
     private static final long serialVersionUID = 1L;
     
