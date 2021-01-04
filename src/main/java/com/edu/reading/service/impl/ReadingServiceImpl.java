@@ -13,6 +13,7 @@ import com.edu.reading.dto.SubjectQueryDto;
 import com.edu.reading.mapper.ClassesMapper;
 import com.edu.reading.mapper.UserMapper;
 import com.edu.reading.model.Book;
+import com.edu.reading.model.Classes;
 import com.edu.reading.model.User;
 import com.edu.reading.model.UserExample;
 import com.edu.reading.service.ReadingService;
@@ -91,6 +92,11 @@ public class ReadingServiceImpl implements ReadingService {
 				User user = lst.get(0);
 				Long classId = user.getClassId();
 				Long schoolId = user.getSchoolId();
+				if(classId != null && classId !=0) {
+					Classes classes = classesMapper.selectByPrimaryKey(classId);
+				}
+				
+				
 			}			
 		}
 		return null;
