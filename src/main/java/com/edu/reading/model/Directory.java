@@ -45,7 +45,7 @@ public class Directory extends BaseModel implements Serializable {
     private Integer term;
 
     /**
-     * 1.数学 2.语文
+     * 1.英语 2.语文
      *
      * @mbggenerated
      */
