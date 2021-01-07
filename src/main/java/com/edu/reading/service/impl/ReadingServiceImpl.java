@@ -87,6 +87,7 @@ public class ReadingServiceImpl implements ReadingService {
 		if(ObjectUtils.isEmpty(subjectDto.getGrade())) {
 			// 年级为空
 			if(!ObjectUtils.isEmpty(subjectDto.getOpenid())) {
+				// openid不为空,已登录用户
 				UserExample ue = new UserExample();
 				ue.createCriteria().andOpenidEqualTo(subjectDto.getOpenid());
 				List<User> lst = userMapper.selectByExample(ue);
@@ -96,8 +97,12 @@ public class ReadingServiceImpl implements ReadingService {
 					Long schoolId = user.getSchoolId();
 					if(!ObjectUtils.isEmpty(classId)) {
 						Classes classes = classesMapper.selectByPrimaryKey(classId);
+						subjectDto.setGrade(classes.getGrade());
 					}
 				}			
+			} else {
+				// openid为空,游客
+				
 			}
 		}
 
