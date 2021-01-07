@@ -12,8 +12,8 @@ import org.springframework.util.ObjectUtils;
 import com.edu.reading.dto.SubjectQueryDto;
 import com.edu.reading.mapper.ClassesMapper;
 import com.edu.reading.mapper.UserMapper;
-import com.edu.reading.model.Book;
 import com.edu.reading.model.Classes;
+import com.edu.reading.model.Lesson;
 import com.edu.reading.model.User;
 import com.edu.reading.model.UserExample;
 import com.edu.reading.service.ReadingService;
@@ -82,23 +82,25 @@ public class ReadingServiceImpl implements ReadingService {
 	 * 底部导航-查询英语,语文课本,绘本栏目
 	 */
 	@Override
-	public List<Book> querySubject(SubjectQueryDto subjectDto) {
-		List<Book> result = null;
-		if(!ObjectUtils.isEmpty(subjectDto.getOpenid())) {
-			UserExample ue = new UserExample();
-			ue.createCriteria().andOpenidEqualTo(subjectDto.getOpenid());
-			List<User> lst = userMapper.selectByExample(ue);
-			if(!ObjectUtils.isEmpty(lst)) {
-				User user = lst.get(0);
-				Long classId = user.getClassId();
-				Long schoolId = user.getSchoolId();
-				if(classId != null && classId !=0) {
-					Classes classes = classesMapper.selectByPrimaryKey(classId);
-				}
-				
-				
-			}			
+	public List<Lesson> querySubject(SubjectQueryDto subjectDto) {
+		List<Lesson> result = null;
+		if(ObjectUtils.isEmpty(subjectDto.getGrade())) {
+			// 年级为空
+			if(!ObjectUtils.isEmpty(subjectDto.getOpenid())) {
+				UserExample ue = new UserExample();
+				ue.createCriteria().andOpenidEqualTo(subjectDto.getOpenid());
+				List<User> lst = userMapper.selectByExample(ue);
+				if(!ObjectUtils.isEmpty(lst)) {
+					User user = lst.get(0);
+					Long classId = user.getClassId();
+					Long schoolId = user.getSchoolId();
+					if(!ObjectUtils.isEmpty(classId)) {
+						Classes classes = classesMapper.selectByPrimaryKey(classId);
+					}
+				}			
+			}
 		}
+
 		return null;
 	}
 }

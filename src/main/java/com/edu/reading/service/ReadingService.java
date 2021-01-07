@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.edu.reading.dto.SubjectQueryDto;
-import com.edu.reading.model.Book;
+import com.edu.reading.model.Lesson;
 import com.edu.reading.model.User;
 
 public interface ReadingService {
@@ -14,5 +14,5 @@ public interface ReadingService {
 	
 	Map<String, Object> home(String openId);
 	
-	List<Book> querySubject( SubjectQueryDto subjectDto);
+	List<Lesson> querySubject( SubjectQueryDto subjectDto);
 }

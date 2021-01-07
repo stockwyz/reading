@@ -18,7 +18,7 @@ import com.edu.reading.common.result.ResultBuilder;
 import com.edu.reading.common.result.ResultCodeEnum;
 import com.edu.reading.common.result.model.RestResult;
 import com.edu.reading.dto.SubjectQueryDto;
-import com.edu.reading.model.Book;
+import com.edu.reading.model.Lesson;
 import com.edu.reading.model.User;
 import com.edu.reading.service.ReadingService;
 
@@ -65,7 +65,7 @@ public class ReadingController extends BaseController {
 	
 	@PostMapping("subject")
 	@ResponseBody
-	public  RestResult<List<Book>> subject(@RequestBody SubjectQueryDto subjectDto) {
+	public  RestResult<List<Lesson>> subject(@RequestBody SubjectQueryDto subjectDto) {
 		if(ObjectUtils.isEmpty(subjectDto.getSubject())) {
 			return ResultBuilder.buildErrorResult("查询科目不能为空");
 		}
@@ -74,7 +74,7 @@ public class ReadingController extends BaseController {
 			return ResultBuilder.buildErrorResult("查询课本类型不能为空");
 		}
 		
-		List<Book> result = readingService.querySubject(subjectDto);
+		List<Lesson> result = readingService.querySubject(subjectDto);
 		if(result.size() > 0) {
 			return ResultBuilder.buildSuccessResult("查询科目课本成功", result);
 		} else {
