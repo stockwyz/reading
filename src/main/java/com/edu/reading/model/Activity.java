@@ -9,7 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Activity extends BaseModel implements Serializable {
-
     /**
      * 活动标题
      *
@@ -43,7 +42,7 @@ public class Activity extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
-    private Long gradeId;
+    private String grade;
 
     /**
      * 活动开始时间
@@ -100,7 +99,7 @@ public class Activity extends BaseModel implements Serializable {
         sb.append(", titlePic=").append(titlePic);
         sb.append(", mainPic=").append(mainPic);
         sb.append(", schoolId=").append(schoolId);
-        sb.append(", gradeId=").append(gradeId);
+        sb.append(", grade=").append(grade);
         sb.append(", startTime=").append(startTime);
         sb.append(", endTime=").append(endTime);
         sb.append(", finished=").append(finished);

@@ -74,11 +74,18 @@ public class ReadingController extends BaseController {
 			return ResultBuilder.buildErrorResult("查询课本类型不能为空");
 		}
 		
-		List<Lesson> result = readingService.querySubject(subjectDto);
-		if(result.size() > 0) {
-			return ResultBuilder.buildSuccessResult("查询科目课本成功", result);
-		} else {
-			return ResultBuilder.buildResult(ResultCodeEnum.EMPTY, null);
+		List<Lesson> result = null;
+		try {
+			result = readingService.querySubject(subjectDto);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+//		if(result.size() > 0) {
+//			return ResultBuilder.buildSuccessResult("查询科目课本成功", result);
+//		} else {
+//			return ResultBuilder.buildResult(ResultCodeEnum.EMPTY, null);
+//		}
+		return null;
 	}
 }

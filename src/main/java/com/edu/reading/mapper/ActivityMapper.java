@@ -1,12 +1,9 @@
 package com.edu.reading.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
-import com.edu.reading.dto.ActivityQueryDto;
 import com.edu.reading.model.Activity;
 import com.edu.reading.model.ActivityExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ActivityMapper {
     int countByExample(ActivityExample example);
@@ -36,6 +33,4 @@ public interface ActivityMapper {
     int updateByPrimaryKeyWithBLOBs(Activity record);
 
     int updateByPrimaryKey(Activity record);
-    
-    List<Activity> getActivityByUserId(ActivityQueryDto dto);
 }

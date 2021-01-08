@@ -6,9 +6,10 @@ import lombok.Setter;
 @Setter
 @Getter
 public class SubjectQueryDto {
+	/**
+	 * 微信openid
+	 */
 	private String openid;
-	
-	private Long classId;
 	
     /**
      * 1.数学 2.语文
@@ -23,11 +24,16 @@ public class SubjectQueryDto {
 	/**
 	 * 年级
 	 */
-	private String grade;
+	private String grade = "1年级";
 	
 	/**
-	 * 学期 1.上学期 2.下学期
+	 * 学期  0上学期 1下学期
 	 */
-	private Integer term;
+	private Integer term = 0;
+	
+	// 出版商ID
+	private Long publisherId;
+	
+	private Long classId;
 	
 }

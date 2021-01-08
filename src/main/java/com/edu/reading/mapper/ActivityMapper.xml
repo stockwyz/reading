@@ -7,7 +7,7 @@
     <result column="title_pic" jdbcType="VARCHAR" property="titlePic" />
     <result column="main_pic" jdbcType="VARCHAR" property="mainPic" />
     <result column="school_id" jdbcType="BIGINT" property="schoolId" />
-    <result column="grade_id" jdbcType="BIGINT" property="gradeId" />
+    <result column="grade" jdbcType="VARCHAR" property="grade" />
     <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
     <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
     <result column="finished" jdbcType="INTEGER" property="finished" />
@@ -80,7 +80,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, title_pic, main_pic, school_id, grade_id, start_time, end_time, finished, 
+    id, title, title_pic, main_pic, school_id, grade, start_time, end_time, finished, 
     type, published, create_user, create_date, update_user, update_date
   </sql>
   <sql id="Blob_Column_List">
@@ -136,13 +136,13 @@
   </delete>
   <insert id="insert" parameterType="com.edu.reading.model.Activity">
     insert into activity (id, title, title_pic, 
-      main_pic, school_id, grade_id, 
+      main_pic, school_id, grade, 
       start_time, end_time, finished, 
       type, published, create_user, 
       create_date, update_user, update_date, 
       intro)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{titlePic,jdbcType=VARCHAR}, 
-      #{mainPic,jdbcType=VARCHAR}, #{schoolId,jdbcType=BIGINT}, #{gradeId,jdbcType=BIGINT}, 
+      #{mainPic,jdbcType=VARCHAR}, #{schoolId,jdbcType=BIGINT}, #{grade,jdbcType=VARCHAR}, 
       #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{finished,jdbcType=INTEGER}, 
       #{type,jdbcType=INTEGER}, #{published,jdbcType=INTEGER}, #{createUser,jdbcType=BIGINT}, 
       #{createDate,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=BIGINT}, #{updateDate,jdbcType=TIMESTAMP}, 
@@ -166,8 +166,8 @@
       <if test="schoolId != null">
         school_id,
       </if>
-      <if test="gradeId != null">
-        grade_id,
+      <if test="grade != null">
+        grade,
       </if>
       <if test="startTime != null">
         start_time,
@@ -216,8 +216,8 @@
       <if test="schoolId != null">
         #{schoolId,jdbcType=BIGINT},
       </if>
-      <if test="gradeId != null">
-        #{gradeId,jdbcType=BIGINT},
+      <if test="grade != null">
+        #{grade,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         #{startTime,jdbcType=TIMESTAMP},
@@ -275,8 +275,8 @@
       <if test="record.schoolId != null">
         school_id = #{record.schoolId,jdbcType=BIGINT},
       </if>
-      <if test="record.gradeId != null">
-        grade_id = #{record.gradeId,jdbcType=BIGINT},
+      <if test="record.grade != null">
+        grade = #{record.grade,jdbcType=VARCHAR},
       </if>
       <if test="record.startTime != null">
         start_time = #{record.startTime,jdbcType=TIMESTAMP},
@@ -320,7 +320,7 @@
       title_pic = #{record.titlePic,jdbcType=VARCHAR},
       main_pic = #{record.mainPic,jdbcType=VARCHAR},
       school_id = #{record.schoolId,jdbcType=BIGINT},
-      grade_id = #{record.gradeId,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       finished = #{record.finished,jdbcType=INTEGER},
@@ -342,7 +342,7 @@
       title_pic = #{record.titlePic,jdbcType=VARCHAR},
       main_pic = #{record.mainPic,jdbcType=VARCHAR},
       school_id = #{record.schoolId,jdbcType=BIGINT},
-      grade_id = #{record.gradeId,jdbcType=BIGINT},
+      grade = #{record.grade,jdbcType=VARCHAR},
       start_time = #{record.startTime,jdbcType=TIMESTAMP},
       end_time = #{record.endTime,jdbcType=TIMESTAMP},
       finished = #{record.finished,jdbcType=INTEGER},
@@ -371,8 +371,8 @@
       <if test="schoolId != null">
         school_id = #{schoolId,jdbcType=BIGINT},
       </if>
-      <if test="gradeId != null">
-        grade_id = #{gradeId,jdbcType=BIGINT},
+      <if test="grade != null">
+        grade = #{grade,jdbcType=VARCHAR},
       </if>
       <if test="startTime != null">
         start_time = #{startTime,jdbcType=TIMESTAMP},
@@ -413,7 +413,7 @@
       title_pic = #{titlePic,jdbcType=VARCHAR},
       main_pic = #{mainPic,jdbcType=VARCHAR},
       school_id = #{schoolId,jdbcType=BIGINT},
-      grade_id = #{gradeId,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       finished = #{finished,jdbcType=INTEGER},
@@ -432,7 +432,7 @@
       title_pic = #{titlePic,jdbcType=VARCHAR},
       main_pic = #{mainPic,jdbcType=VARCHAR},
       school_id = #{schoolId,jdbcType=BIGINT},
-      grade_id = #{gradeId,jdbcType=BIGINT},
+      grade = #{grade,jdbcType=VARCHAR},
       start_time = #{startTime,jdbcType=TIMESTAMP},
       end_time = #{endTime,jdbcType=TIMESTAMP},
       finished = #{finished,jdbcType=INTEGER},
@@ -444,13 +444,4 @@
       update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="getActivityByUserId" parameterType="com.edu.reading.dto.ActivityQueryDto" resultMap="BaseResultMap">
-	select    
-		 <include refid="Base_Column_List" />
-	from activity where id in (select distinct activity_id from user_activity_book where user_id=#{userId,jdbcType=BIGINT})
-    <if test="finished != null">
-    	and finished = #{finished,jdbcType=INTEGER} 
-    </if>
-    order by type, end_time desc
-  </select>   
 </mapper>
