@@ -10,6 +10,7 @@ import com.edu.reading.common.tree.annotation.Child;
 import com.edu.reading.common.tree.annotation.Children;
 import com.edu.reading.common.tree.annotation.Expanded;
 import com.edu.reading.common.tree.annotation.Leaf;
+import com.edu.reading.common.tree.annotation.NodeCode;
 import com.edu.reading.common.tree.annotation.Parent;
 import com.edu.reading.common.tree.annotation.SettingParent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -94,8 +95,25 @@ public class Directory extends BaseModel implements TreeNode, Serializable {
      */
     @JsonIgnore
     private boolean expanded;   
+    
+    private String levelcode;
 
     private static final long serialVersionUID = 1L;
+    
+    @NodeCode
+    public Long getId() {
+        return id;
+    }
+
+	@Override
+	public String getCode() {
+		return String.valueOf(this.getId());
+	}
+
+	@Override
+	public String getLevelCode() {
+		return levelcode;
+	}
 
     @Parent
     public Long getParentid() {
@@ -210,24 +228,6 @@ public class Directory extends BaseModel implements TreeNode, Serializable {
 	public int compareTo(TreeNode o) {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getCode() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String getLevelCode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

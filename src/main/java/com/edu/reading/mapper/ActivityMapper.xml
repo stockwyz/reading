@@ -448,7 +448,7 @@
   <select id="getActivityByUserId" parameterType="com.edu.reading.dto.ActivityQueryDto" resultMap="BaseResultMap">
 	select    
 		 <include refid="Base_Column_List" />
-	from activity where id in (select distinct activity_id from user_activity_book where user_id=#{userId,jdbcType=BIGINT})
+	from activity where id in (select distinct activity_id from user_lesson where user_id=#{userId,jdbcType=BIGINT} and activity_id is not null)
     <if test="finished != null">
     	and finished = #{finished,jdbcType=INTEGER} 
     </if>

@@ -526,9 +526,16 @@ public abstract class TreeEntry<T extends TreeNode> {
 			}
 		} else {
 			// 精确
-			if (objValue.equals(value)) {
-				return true;
+			if(objValue instanceof String) {
+				if (objValue.equals(value)) {
+					return true;
+				}				
+			} else {
+				if (objValue.toString().equals(value)) {
+					return true;
+				}
 			}
+
 		}
 		return false;
 	}

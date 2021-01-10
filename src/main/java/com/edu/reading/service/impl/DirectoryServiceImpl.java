@@ -27,7 +27,7 @@ public class DirectoryServiceImpl extends TreeEntry<Directory> implements Direct
 	public List<Directory> getDataList() {
 		// TODO Auto-generated method stub
 		DirectoryExample ex = new DirectoryExample();
-		ex.setOrderByClause("parentid");
+		ex.setOrderByClause("parent_id");
 		return directoryMapper.selectByExample(ex);
 	}
 

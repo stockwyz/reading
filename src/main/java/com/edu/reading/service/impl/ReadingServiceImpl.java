@@ -1,5 +1,6 @@
 package com.edu.reading.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import com.edu.reading.mapper.DirectoryMapper;
 import com.edu.reading.mapper.SchoolGradeMapper;
 import com.edu.reading.mapper.SchoolPublisherMapper;
 import com.edu.reading.mapper.UserMapper;
+import com.edu.reading.model.Directory;
 import com.edu.reading.model.Lesson;
 import com.edu.reading.model.SchoolGrade;
 import com.edu.reading.model.SchoolGradeExample;
@@ -22,6 +24,7 @@ import com.edu.reading.model.SchoolPublisher;
 import com.edu.reading.model.SchoolPublisherExample;
 import com.edu.reading.model.User;
 import com.edu.reading.model.UserExample;
+import com.edu.reading.service.DirectoryService;
 import com.edu.reading.service.ReadingService;
 
 @Service
@@ -35,7 +38,9 @@ public class ReadingServiceImpl implements ReadingService {
 	@Autowired
 	private SchoolPublisherMapper schoolPublisherMapper;	
 	@Autowired
-	private SchoolGradeMapper schoolGradeMapper;		
+	private SchoolGradeMapper schoolGradeMapper;	
+	@Autowired
+	private DirectoryService directoryService;
 	
 	/**
 	 * 底部导航-我的(班级)
@@ -90,50 +95,51 @@ public class ReadingServiceImpl implements ReadingService {
 	 * 底部导航-查询英语,语文课本,绘本栏目
 	 */
 	@Override
-	public List<Lesson> querySubject(SubjectQueryDto subjectDto) throws Exception {
+	public Map<String, Object> querySubject(SubjectQueryDto subjectDto) throws Exception {
 		Map<String, String> param = new HashMap<>();
 		Map<String, Object> result = new HashMap<>();
 		Long schoolId = 0L;
-		
+		List<SchoolGrade> allGradeLst = null;
 		if(subjectDto.getType() == 1) {
 			// 查询课本
 			// 1.按用户所在学校,年级查询目录
-			if(!ObjectUtils.isEmpty(subjectDto.getOpenid())) {
-				// openid不为空, 查询已登录用户
-				UserExample ue = new UserExample();
-				ue.createCriteria().andOpenidEqualTo(subjectDto.getOpenid());
-				List<User> lst = userMapper.selectByExample(ue);
-				if(ObjectUtils.isEmpty(lst)) {
-					throw new Exception("openid:" + subjectDto.getOpenid() + "没有对应的授权用户!");
-				}	
-				
-				User user = lst.get(0);
-				if(user.getSchoolId() != null) {
-					schoolId = user.getSchoolId();
+			if(subjectDto.getOpenid() != null) {
+				if(subjectDto.getSchoolId() == null) {
+					// 查询已授权绑定用户的学校ID
+					UserExample ue = new UserExample();
+					ue.createCriteria().andOpenidEqualTo(subjectDto.getOpenid());
+					List<User> lst = userMapper.selectByExample(ue);
+					if(ObjectUtils.isEmpty(lst)) {
+						throw new Exception("openid:" + subjectDto.getOpenid() + "没有对应的授权用户!");
+					}	
+					
+					User user = lst.get(0);
+					if(user.getSchoolId() != null) {
+						schoolId = user.getSchoolId();
+					}					
 				}
-				if(schoolId == 0L && ObjectUtils.isEmpty(subjectDto.getGrade())) {
+
+				allGradeLst = getAllGradeBySchoolId(schoolId);
+				if(schoolId == 0L || ObjectUtils.isEmpty(subjectDto.getGrade())) {
 					// 用户未选择所属学校并且查询参数年级为空时, 取默认学校的最大年级
-					SchoolGradeExample ex = new SchoolGradeExample();
-					ex.createCriteria().andSchoolIdEqualTo(schoolId);
-					ex.setOrderByClause("grade desc");
-					List<SchoolGrade> sgLst = schoolGradeMapper.selectByExample(ex);
-					if(!ObjectUtils.isEmpty(sgLst)) {
-						subjectDto.setGrade(sgLst.get(0).getGrade());
+					if(!ObjectUtils.isEmpty(allGradeLst)) {
+						subjectDto.setGrade(allGradeLst.get(0).getGrade());
+					} else {
+						subjectDto.setGrade("1年级");
 					}
 				}
 			} else {
-				// openid为空,游客
-				// 取默认学校
-				SchoolGradeExample ex = new SchoolGradeExample();
-				ex.createCriteria().andSchoolIdEqualTo(schoolId);
-				ex.setOrderByClause("grade desc");
+				// openid为空,游客取默认学校(id:0)
 				// 取默认学校的最大年级
-				List<SchoolGrade> sgLst = schoolGradeMapper.selectByExample(ex);
-				if(!ObjectUtils.isEmpty(sgLst)) {
-					subjectDto.setGrade(sgLst.get(0).getGrade());
+				allGradeLst = getAllGradeBySchoolId(schoolId);
+				if(!ObjectUtils.isEmpty(allGradeLst)) {
+					subjectDto.setGrade(allGradeLst.get(0).getGrade());
+				} else {
+					subjectDto.setGrade("1年级");
 				}
-
 			}
+			// 该学校所有年级
+			result.put("grades", allGradeLst);
 			
 			// 2.查询学校所用教材
 			SchoolPublisherExample spe = new SchoolPublisherExample();
@@ -145,7 +151,19 @@ public class ReadingServiceImpl implements ReadingService {
 			subjectDto.setPublisherId(spLst.get(0).getPublisherId());
 			
 			// 3.查询所在年级教材目录
-			directoryMapper.selectByExample(null);
+			StringBuffer sb = new StringBuffer();
+			sb.append("publisherId:" + subjectDto.getPublisherId()).append("(@)grade:" + subjectDto.getGrade());
+			if(subjectDto.getTerm() != -1) {
+				sb.append("(@)term:" + subjectDto.getTerm());
+			}
+			String[] filters = new String[] {sb.toString()};
+			List<Directory> subDirectory = new ArrayList<>();
+			
+			DirectoryServiceImpl dsl = (DirectoryServiceImpl) directoryService;
+			dsl.initTreeList();
+			dsl.locateObjectInTree(dsl.getTreeList(), filters, false, subDirectory);
+			result.put("content", subDirectory);
+
 		} else {
 			//查询绘文
 			
@@ -163,6 +181,14 @@ public class ReadingServiceImpl implements ReadingService {
 			subjectDto.setTerm(0);
 		}
 
-		return null;
+		return result;
+	}
+	
+	private List<SchoolGrade>  getAllGradeBySchoolId(Long schoolId) {
+		SchoolGradeExample ex = new SchoolGradeExample();
+		ex.createCriteria().andSchoolIdEqualTo(schoolId);
+		ex.setOrderByClause("grade desc");
+		List<SchoolGrade> sgLst = schoolGradeMapper.selectByExample(ex);
+		return sgLst;
 	}
 }
