@@ -13,11 +13,12 @@ import org.springframework.util.ObjectUtils;
 import com.edu.reading.dto.SubjectQueryDto;
 import com.edu.reading.mapper.ClassesMapper;
 import com.edu.reading.mapper.DirectoryMapper;
+import com.edu.reading.mapper.LessonMapper;
 import com.edu.reading.mapper.SchoolGradeMapper;
 import com.edu.reading.mapper.SchoolPublisherMapper;
 import com.edu.reading.mapper.UserMapper;
 import com.edu.reading.model.Directory;
-import com.edu.reading.model.Lesson;
+import com.edu.reading.model.LessonExample;
 import com.edu.reading.model.SchoolGrade;
 import com.edu.reading.model.SchoolGradeExample;
 import com.edu.reading.model.SchoolPublisher;
@@ -41,6 +42,8 @@ public class ReadingServiceImpl implements ReadingService {
 	private SchoolGradeMapper schoolGradeMapper;	
 	@Autowired
 	private DirectoryService directoryService;
+	@Autowired
+	private LessonMapper lessonMapper;	
 	
 	/**
 	 * 底部导航-我的(班级)
@@ -165,22 +168,51 @@ public class ReadingServiceImpl implements ReadingService {
 			result.put("content", subDirectory);
 
 		} else {
-			//查询绘文
+			//查询绘本
+			// 1.按用户所在学校,年级查询目录
+			if(subjectDto.getOpenid() != null) {
+				if(subjectDto.getSchoolId() == null) {
+					// 查询已授权绑定用户的学校ID
+					UserExample ue = new UserExample();
+					ue.createCriteria().andOpenidEqualTo(subjectDto.getOpenid());
+					List<User> lst = userMapper.selectByExample(ue);
+					if(ObjectUtils.isEmpty(lst)) {
+						throw new Exception("openid:" + subjectDto.getOpenid() + "没有对应的授权用户!");
+					}	
+					
+					User user = lst.get(0);
+					if(user.getSchoolId() != null) {
+						schoolId = user.getSchoolId();
+					}					
+				}
+
+				allGradeLst = getAllGradeBySchoolId(schoolId);
+				if(schoolId == 0L || ObjectUtils.isEmpty(subjectDto.getGrade())) {
+					// 用户未选择所属学校并且查询参数年级为空时, 取默认学校的最大年级
+					if(!ObjectUtils.isEmpty(allGradeLst)) {
+						subjectDto.setGrade(allGradeLst.get(0).getGrade());
+					} else {
+						subjectDto.setGrade("1年级");
+					}
+				}
+			} else {
+				// openid为空,游客取默认学校(id:0)
+				// 取默认学校的最大年级
+				allGradeLst = getAllGradeBySchoolId(schoolId);
+				if(!ObjectUtils.isEmpty(allGradeLst)) {
+					subjectDto.setGrade(allGradeLst.get(0).getGrade());
+				} else {
+					subjectDto.setGrade("1年级");
+				}
+			}
+			// 该学校所有年级
+			result.put("grades", allGradeLst);
 			
+			// 查询所在年级绘本
+			LessonExample le = new LessonExample();
+			le.createCriteria().andSchoolIdEqualTo(schoolId).andGradeEqualTo(subjectDto.getGrade()).andTermEqualTo(subjectDto.getTerm());
+			result.put("content", lessonMapper.selectByExample(le));			
 		}
-		
-		
-		
-		if(ObjectUtils.isEmpty(subjectDto.getGrade())) {
-			// 年级为空
-
-		}
-		
-		if(ObjectUtils.isEmpty(subjectDto.getTerm())) {
-			// 默认上学期
-			subjectDto.setTerm(0);
-		}
-
 		return result;
 	}
 	
