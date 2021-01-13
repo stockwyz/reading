@@ -2,11 +2,14 @@ package com.edu.reading.model;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@ApiModel(value="课程实体",description="课程查询接口返回课程实体")
 public class Lesson extends BaseModel implements Serializable {
 
     /**
@@ -14,6 +17,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "目录ID-课本用")
     private Long directoryId;
 
     /**
@@ -21,6 +25,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "课程标题")
     private String title;
 
     /**
@@ -28,6 +33,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "课程图片URL")
     private String pic;
 
     /**
@@ -35,6 +41,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "课程音频URL")
     private String audio;
 
     /**
@@ -42,6 +49,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "上传教师ID-绘本用")
     private Long userId;
 
     /**
@@ -49,6 +57,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "上传教师所在学校ID-绘本用")
     private Long schoolId;
 
     /**
@@ -56,6 +65,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "上传教师所在班级ID-绘本用")
     private Long classId;
 
     /**
@@ -63,6 +73,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "绘本适用年级")
     private String grade;
 
     /**
@@ -70,6 +81,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "绘本适用学期--0上学期 1下学期")
     private Integer term;
 
     /**
@@ -77,6 +89,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "是否发布--0.未发布 1已发布")
     private Integer published;
 
     /**
@@ -84,6 +97,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "课程学科--1.数学 2.语文")
     private Integer subject;
 
     /**
@@ -91,6 +105,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "课程类型--1.课本 2绘本")
     private Integer type;
 
     /**
@@ -98,6 +113,7 @@ public class Lesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+    @ApiModelProperty(value = "课文内容")
     private String content;
 
     private static final long serialVersionUID = 1L;

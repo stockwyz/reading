@@ -11,6 +11,9 @@ import com.edu.reading.common.result.ResultBuilder;
 import com.edu.reading.common.result.model.RestResult;
 import com.edu.reading.service.CodeService;
 
+import io.swagger.annotations.Api;
+
+@Api(hidden = true)
 @RestController
 @RequestMapping("/code/")
 public class CodeController extends BaseController {

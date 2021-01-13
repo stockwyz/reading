@@ -2,11 +2,14 @@ package com.edu.reading.model;
 
 import java.io.Serializable;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@ApiModel(value="更新个人信息参数体",description="更新个人信息参数体")
 public class User extends BaseModel implements Serializable {
 
     /**
@@ -14,6 +17,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "微信openid", required = true)
     private String openid;
 
     /**
@@ -21,6 +25,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "昵称", required = false)
     private String nickname;
 
     /**
@@ -28,6 +33,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "姓名", required = false)
     private String name;
 
     /**
@@ -35,6 +41,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "头像图片路径", required = false)
     private String avatar;
 
     /**
@@ -42,6 +49,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "性别--1.男 2.女", required = false)
     private String gendar;
 
     /**
@@ -49,6 +57,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "个性签名", required = false)
     private String motto;
 
     /**
@@ -56,6 +65,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "积分--待定", required = false)
     private Integer score;
 
     /**
@@ -63,6 +73,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "等级--待定", required = false)
     private Integer studyLevel;
 
     /**
@@ -70,6 +81,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "用户类型-1.学生 2.教师", required = false)
     private Integer type;
 
     /**
@@ -77,6 +89,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "所属学校id", required = false)
     private Long schoolId;
 
     /**
@@ -84,6 +97,7 @@ public class User extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
+	@ApiModelProperty(value = "所属班级id", required = false)
     private Long classId;
 
     private static final long serialVersionUID = 1L;

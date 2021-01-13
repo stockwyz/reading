@@ -14,5 +14,7 @@ public interface ReadingService {
 	
 	Map<String, Object> home(String openId);
 	
-	Map<String, Object> querySubject( SubjectQueryDto subjectDto) throws Exception;
+	Map<String, Object> querySubject(SubjectQueryDto subjectDto) throws Exception;
+	
+	List<Lesson> queryLesson(Long id) throws Exception;
 }

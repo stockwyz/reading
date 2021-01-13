@@ -18,7 +18,9 @@ import com.edu.reading.mapper.SchoolGradeMapper;
 import com.edu.reading.mapper.SchoolPublisherMapper;
 import com.edu.reading.mapper.UserMapper;
 import com.edu.reading.model.Directory;
+import com.edu.reading.model.Lesson;
 import com.edu.reading.model.LessonExample;
+import com.edu.reading.model.LessonExample.Criteria;
 import com.edu.reading.model.SchoolGrade;
 import com.edu.reading.model.SchoolGradeExample;
 import com.edu.reading.model.SchoolPublisher;
@@ -99,7 +101,7 @@ public class ReadingServiceImpl implements ReadingService {
 	 */
 	@Override
 	public Map<String, Object> querySubject(SubjectQueryDto subjectDto) throws Exception {
-		Map<String, String> param = new HashMap<>();
+		Map<String, Object> param = new HashMap<>();
 		Map<String, Object> result = new HashMap<>();
 		Long schoolId = 0L;
 		List<SchoolGrade> allGradeLst = null;
@@ -210,9 +212,19 @@ public class ReadingServiceImpl implements ReadingService {
 			
 			// 查询所在年级绘本
 			LessonExample le = new LessonExample();
-			le.createCriteria().andSchoolIdEqualTo(schoolId).andGradeEqualTo(subjectDto.getGrade()).andTermEqualTo(subjectDto.getTerm());
+			Criteria cri = le.createCriteria();
+			cri.andSchoolIdEqualTo(schoolId).andGradeEqualTo(subjectDto.getGrade()).andPublishedEqualTo(1);
+			if(subjectDto.getTerm() != -1) {
+				cri.andTermEqualTo(subjectDto.getTerm());
+			}
 			result.put("content", lessonMapper.selectByExample(le));			
 		}
+		
+		// 记录当前的查询参数
+		param.put("schoolId", schoolId);
+		param.put("grade", subjectDto.getGrade());
+		param.put("term", subjectDto.getTerm());
+		result.put("param", param);
 		return result;
 	}
 	
@@ -222,5 +234,13 @@ public class ReadingServiceImpl implements ReadingService {
 		ex.setOrderByClause("grade desc");
 		List<SchoolGrade> sgLst = schoolGradeMapper.selectByExample(ex);
 		return sgLst;
+	}
+
+	@Override
+	public List<Lesson> queryLesson(Long id) throws Exception {
+		LessonExample le = new LessonExample();
+		le.createCriteria().andPublishedEqualTo(1);
+		le.or().andIdEqualTo(id).andDirectoryIdEqualTo(id);
+		return lessonMapper.selectByExample(le);
 	}
 }

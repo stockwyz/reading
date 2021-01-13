@@ -13,6 +13,11 @@ import com.edu.reading.common.result.ResultBuilder;
 import com.edu.reading.common.result.model.RestResult;
 import com.edu.reading.service.SysService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+
+@Api(tags = "系统接口")
 @RestController
 @RequestMapping("sys")
 public class SysController extends BaseController {
@@ -21,9 +26,9 @@ public class SysController extends BaseController {
 
 	private Logger logger = LoggerFactory.getLogger(SysController.class);
 	
-
+	@ApiOperation("前端获取openid接口")
 	@GetMapping("/openid")
-	public RestResult<String> getOpenid(@RequestParam String code) {
+	public RestResult<String> getOpenid(@RequestParam @ApiParam(value = "前端从微信取得的授权码", required = true) String code) {
 		try {
 			return ResultBuilder.buildSuccessResult("获取OpenId成功", sysService.wechatSession(code));
 		} catch (Exception e) {
@@ -77,9 +82,10 @@ public class SysController extends BaseController {
 	// return result;
 	// }
 
+	@ApiOperation("系统版本接口")
 	@GetMapping("/version")
 	@ResponseBody
-	public RestResult<? extends Object> visitor() {
+	public RestResult<? extends Object> version() {
 		return ResultBuilder.buildSuccessResult("1.0");
 	}
 }
