@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 140.143.26.29
+Source Server         : Tencent-140.143.26.29
 Source Server Version : 50505
 Source Host           : 140.143.26.29:36639
 Source Database       : reading
@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50505
 File Encoding         : 65001
 
-Date: 2021-01-11 00:23:33
+Date: 2021-01-18 16:12:11
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for activity
+-- Table structure for `activity`
 -- ----------------------------
 DROP TABLE IF EXISTS `activity`;
 CREATE TABLE `activity` (
@@ -49,7 +49,7 @@ INSERT INTO `activity` VALUES ('4', '第1期7天阅读', '', '人教版课本天
 INSERT INTO `activity` VALUES ('5', '英文原音电影跟读PK', '', '原音迪士尼电影', '', null, null, '2020-12-01 00:00:00', '2020-12-07 00:00:00', '0', '1', '1', null, null, null, null);
 
 -- ----------------------------
--- Table structure for activity_lesson
+-- Table structure for `activity_lesson`
 -- ----------------------------
 DROP TABLE IF EXISTS `activity_lesson`;
 CREATE TABLE `activity_lesson` (
@@ -69,7 +69,7 @@ CREATE TABLE `activity_lesson` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for area
+-- Table structure for `area`
 -- ----------------------------
 DROP TABLE IF EXISTS `area`;
 CREATE TABLE `area` (
@@ -3449,7 +3449,7 @@ INSERT INTO `area` VALUES ('3355', 'bd5f24611d9311e794fe00ff6e92c03d', '92', '0'
 INSERT INTO `area` VALUES ('3356', 'bd5f25851d9311e794fe00ff6e92c03d', '93', '0', '国外', null, '2017-04-10 10:16:40', null, '2017-04-10 10:16:40');
 
 -- ----------------------------
--- Table structure for classes
+-- Table structure for `classes`
 -- ----------------------------
 DROP TABLE IF EXISTS `classes`;
 CREATE TABLE `classes` (
@@ -3473,7 +3473,7 @@ INSERT INTO `classes` VALUES ('1', '1班', '一年级', '40', '2', null, '1', nu
 INSERT INTO `classes` VALUES ('2', '2班', '一年级', '40', '2', null, '1', null, '1', null);
 
 -- ----------------------------
--- Table structure for directory
+-- Table structure for `directory`
 -- ----------------------------
 DROP TABLE IF EXISTS `directory`;
 CREATE TABLE `directory` (
@@ -3498,9 +3498,12 @@ CREATE TABLE `directory` (
 INSERT INTO `directory` VALUES ('1', '1', 'AAA', null, '6年级', '1', '1', '1', null, null, null, null);
 INSERT INTO `directory` VALUES ('2', '1', 'BBB', '1', '6年级', '1', '1', '1', null, null, null, null);
 INSERT INTO `directory` VALUES ('3', '1', 'CCC', null, '6年级', '1', '1', '1', null, null, null, null);
+INSERT INTO `directory` VALUES ('4', '1', 'Travel English', null, '2年级', '1', '1', '1', null, null, null, null);
+INSERT INTO `directory` VALUES ('5', '1', 'Book hotel', '4', '2年级', '1', '1', '1', null, null, null, null);
+INSERT INTO `directory` VALUES ('6', '1', 'Take Plane', '4', '2年级', '1', '1', '1', null, null, null, null);
 
 -- ----------------------------
--- Table structure for lesson
+-- Table structure for `lesson`
 -- ----------------------------
 DROP TABLE IF EXISTS `lesson`;
 CREATE TABLE `lesson` (
@@ -3508,7 +3511,7 @@ CREATE TABLE `lesson` (
   `directory_id` bigint(20) DEFAULT NULL COMMENT '目录ID-课本用',
   `title` varchar(200) NOT NULL DEFAULT '' COMMENT '课本标题',
   `content` text NOT NULL COMMENT '课本内容',
-  `pic` varchar(500) DEFAULT NULL COMMENT '图片-背景URL',
+  `pic` text DEFAULT NULL COMMENT '图片-背景URL',
   `audio` varchar(500) DEFAULT NULL COMMENT '音频文件URL',
   `user_id` bigint(20) DEFAULT NULL COMMENT '上传教师ID-绘本用',
   `school_id` bigint(20) DEFAULT NULL COMMENT '学校ID--绘本用',
@@ -3528,9 +3531,10 @@ CREATE TABLE `lesson` (
 -- ----------------------------
 -- Records of lesson
 -- ----------------------------
+INSERT INTO `lesson` VALUES ('1', '5', 'How to book a nice hotel in travel', 'Hi, guys.It is an important thing to book a hotel on line when you are in travel.', 'https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=d&word=%E9%85%92%E5%BA%97%E5%9B%BE%E7%89%87&hs=2&pn=4&spn=0&di=72820&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&ie=utf-8&oe=utf-8&cl=2&lm=-1&cs=4053443723%2C695555357&os=3385580860%2C2818033454&simid=3465658791%2C365574803&adpicid=0&lpn=0&ln=30&fr=ala&fm=&sme=&cg=&bdtype=0&oriquery=%E9%85%92%E5%BA%97%E5%9B%BE%E7%89%87&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fimage.qmango.com%2Fhotelimg%2Fdl1210%2F119297%2F793.jpeg%26refer%3Dhttp%3A%2F%2Fimage.qmango.com%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1613111031%26t%3D76db237af09c3d4b4099dd33773a49c2&fromurl=ippr_z2C%24qAzdH3FAzdH3Fi5pjstgu5_z%26e3Bq4wg25_z%26e3Bv54AzdH3Fi5pjsAzdH3F1jpwts%3Fi5pjst1%3D88ldl0&gsm=5&islist=&querylist=', null, null, null, null, null, null, '1', '1', '1', null, null, null, null);
 
 -- ----------------------------
--- Table structure for publisher
+-- Table structure for `publisher`
 -- ----------------------------
 DROP TABLE IF EXISTS `publisher`;
 CREATE TABLE `publisher` (
@@ -3550,7 +3554,7 @@ INSERT INTO `publisher` VALUES ('1', '人民教育出版社', null, null, null, 
 INSERT INTO `publisher` VALUES ('2', '北师大出版社', null, null, null, null);
 
 -- ----------------------------
--- Table structure for school
+-- Table structure for `school`
 -- ----------------------------
 DROP TABLE IF EXISTS `school`;
 CREATE TABLE `school` (
@@ -3576,7 +3580,7 @@ INSERT INTO `school` VALUES ('1', '呼家楼第一小学', '北京市朝阳区�
 INSERT INTO `school` VALUES ('2', '北京市八一小学', '北京市海淀区苏州街', null, null, '5', null, null, null, null, null);
 
 -- ----------------------------
--- Table structure for school_grade
+-- Table structure for `school_grade`
 -- ----------------------------
 DROP TABLE IF EXISTS `school_grade`;
 CREATE TABLE `school_grade` (
@@ -3603,7 +3607,7 @@ INSERT INTO `school_grade` VALUES ('7', '2', '5年级', null, null, null, null);
 INSERT INTO `school_grade` VALUES ('8', '2', '6年级', null, null, null, null);
 
 -- ----------------------------
--- Table structure for school_publisher
+-- Table structure for `school_publisher`
 -- ----------------------------
 DROP TABLE IF EXISTS `school_publisher`;
 CREATE TABLE `school_publisher` (
@@ -3621,12 +3625,12 @@ CREATE TABLE `school_publisher` (
 -- ----------------------------
 -- Records of school_publisher
 -- ----------------------------
-INSERT INTO `school_publisher` VALUES ('1', '0', '1', '6年级', null, null, null, null);
+INSERT INTO `school_publisher` VALUES ('1', '0', '1', '2年级', null, null, null, null);
 INSERT INTO `school_publisher` VALUES ('2', '1', '1', '6年级', null, null, null, null);
 INSERT INTO `school_publisher` VALUES ('3', '2', '1', '6年级', null, null, null, null);
 
 -- ----------------------------
--- Table structure for user
+-- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -3634,7 +3638,7 @@ CREATE TABLE `user` (
   `openid` varchar(80) NOT NULL COMMENT '微信openid',
   `nickname` varchar(30) DEFAULT NULL COMMENT '昵称',
   `name` varchar(10) DEFAULT NULL COMMENT '姓名',
-  `avatar` varchar(500) DEFAULT NULL COMMENT '头像图片路径',
+  `avatar` text DEFAULT NULL COMMENT '头像图片路径',
   `gendar` varchar(2) DEFAULT NULL COMMENT '性别 男 女',
   `motto` varchar(100) DEFAULT NULL COMMENT '个性签名',
   `score` int(11) DEFAULT 0 COMMENT '积分--待定',
@@ -3656,7 +3660,7 @@ INSERT INTO `user` VALUES ('4998416590458789888', 'oIQbX5PzpA7KRhasCO71otDj4MQ8'
 INSERT INTO `user` VALUES ('5001468216262369280', 'oIQbX5EwHjsqkBquXrhe1KMC1Fx0', null, null, null, null, null, '0', '0', '1', '2', '1', '5001468216262369280', '2020-12-30 11:44:20', '1', '2020-12-30 15:37:17');
 
 -- ----------------------------
--- Table structure for user_class
+-- Table structure for `user_class`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_class`;
 CREATE TABLE `user_class` (
@@ -3677,7 +3681,7 @@ INSERT INTO `user_class` VALUES ('1', '4998416590458789888', '1', null, null, nu
 INSERT INTO `user_class` VALUES ('2', '4998416590458789888', '2', null, null, null, null);
 
 -- ----------------------------
--- Table structure for user_lesson
+-- Table structure for `user_lesson`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_lesson`;
 CREATE TABLE `user_lesson` (
@@ -3704,7 +3708,7 @@ INSERT INTO `user_lesson` VALUES ('4', '4998416590458789888', '4', null, '0.00',
 INSERT INTO `user_lesson` VALUES ('5', '4998416590458789888', '5', null, '0.00', null, null, null, null, null);
 
 -- ----------------------------
--- Table structure for user_lesson_audio
+-- Table structure for `user_lesson_audio`
 -- ----------------------------
 DROP TABLE IF EXISTS `user_lesson_audio`;
 CREATE TABLE `user_lesson_audio` (
@@ -3724,7 +3728,7 @@ CREATE TABLE `user_lesson_audio` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for WORKER_NODE
+-- Table structure for `WORKER_NODE`
 -- ----------------------------
 DROP TABLE IF EXISTS `WORKER_NODE`;
 CREATE TABLE `WORKER_NODE` (
@@ -3736,7 +3740,7 @@ CREATE TABLE `WORKER_NODE` (
   `MODIFIED` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp() COMMENT 'modified time',
   `CREATED` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'created time',
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3567 DEFAULT CHARSET=utf8 COMMENT='DB WorkerID Assigner for UID Generator';
+) ENGINE=InnoDB AUTO_INCREMENT=3613 DEFAULT CHARSET=utf8 COMMENT='DB WorkerID Assigner for UID Generator';
 
 -- ----------------------------
 -- Records of WORKER_NODE
@@ -3813,3 +3817,49 @@ INSERT INTO `WORKER_NODE` VALUES ('3563', '192.168.31.57', '1610294944427-14027'
 INSERT INTO `WORKER_NODE` VALUES ('3564', '192.168.31.57', '1610294944543-39535', '2', '2021-01-11', '2021-01-10 16:09:02', '2021-01-10 16:09:02');
 INSERT INTO `WORKER_NODE` VALUES ('3565', '192.168.31.57', '1610295643149-34764', '2', '2021-01-11', '2021-01-10 16:20:41', '2021-01-10 16:20:41');
 INSERT INTO `WORKER_NODE` VALUES ('3566', '192.168.31.57', '1610295643243-47073', '2', '2021-01-11', '2021-01-10 16:20:41', '2021-01-10 16:20:41');
+INSERT INTO `WORKER_NODE` VALUES ('3567', '192.168.31.57', '1610371869015-9796', '2', '2021-01-11', '2021-01-11 13:31:09', '2021-01-11 13:31:09');
+INSERT INTO `WORKER_NODE` VALUES ('3568', '192.168.31.57', '1610371869143-44160', '2', '2021-01-11', '2021-01-11 13:31:09', '2021-01-11 13:31:09');
+INSERT INTO `WORKER_NODE` VALUES ('3569', '192.168.31.57', '1610463208598-51979', '2', '2021-01-12', '2021-01-12 14:53:28', '2021-01-12 14:53:28');
+INSERT INTO `WORKER_NODE` VALUES ('3570', '192.168.31.57', '1610463208714-10244', '2', '2021-01-12', '2021-01-12 14:53:28', '2021-01-12 14:53:28');
+INSERT INTO `WORKER_NODE` VALUES ('3571', '172.16.163.42', '1610502698647-87625', '2', '2021-01-13', '2021-01-13 01:51:35', '2021-01-13 01:51:35');
+INSERT INTO `WORKER_NODE` VALUES ('3572', '172.16.163.42', '1610502698795-60398', '2', '2021-01-13', '2021-01-13 01:51:35', '2021-01-13 01:51:35');
+INSERT INTO `WORKER_NODE` VALUES ('3573', '172.16.163.42', '1610504168535-22835', '2', '2021-01-13', '2021-01-13 02:16:05', '2021-01-13 02:16:05');
+INSERT INTO `WORKER_NODE` VALUES ('3574', '172.16.163.42', '1610504168644-36876', '2', '2021-01-13', '2021-01-13 02:16:05', '2021-01-13 02:16:05');
+INSERT INTO `WORKER_NODE` VALUES ('3575', '172.16.163.42', '1610507125319-62266', '2', '2021-01-13', '2021-01-13 03:05:22', '2021-01-13 03:05:22');
+INSERT INTO `WORKER_NODE` VALUES ('3576', '172.16.163.42', '1610507125452-68867', '2', '2021-01-13', '2021-01-13 03:05:22', '2021-01-13 03:05:22');
+INSERT INTO `WORKER_NODE` VALUES ('3577', '172.16.163.42', '1610507405757-73157', '2', '2021-01-13', '2021-01-13 03:10:02', '2021-01-13 03:10:02');
+INSERT INTO `WORKER_NODE` VALUES ('3578', '172.16.163.42', '1610507405877-68777', '2', '2021-01-13', '2021-01-13 03:10:02', '2021-01-13 03:10:02');
+INSERT INTO `WORKER_NODE` VALUES ('3579', '172.16.163.42', '1610507858246-58431', '2', '2021-01-13', '2021-01-13 03:17:35', '2021-01-13 03:17:35');
+INSERT INTO `WORKER_NODE` VALUES ('3580', '172.16.163.42', '1610507858976-41741', '2', '2021-01-13', '2021-01-13 03:17:35', '2021-01-13 03:17:35');
+INSERT INTO `WORKER_NODE` VALUES ('3581', '172.16.163.42', '1610507937437-37802', '2', '2021-01-13', '2021-01-13 03:18:54', '2021-01-13 03:18:54');
+INSERT INTO `WORKER_NODE` VALUES ('3582', '172.16.163.42', '1610507938232-15537', '2', '2021-01-13', '2021-01-13 03:18:55', '2021-01-13 03:18:55');
+INSERT INTO `WORKER_NODE` VALUES ('3583', '172.16.163.42', '1610509127967-16568', '2', '2021-01-13', '2021-01-13 03:38:44', '2021-01-13 03:38:44');
+INSERT INTO `WORKER_NODE` VALUES ('3584', '172.16.163.42', '1610509128629-95768', '2', '2021-01-13', '2021-01-13 03:38:45', '2021-01-13 03:38:45');
+INSERT INTO `WORKER_NODE` VALUES ('3585', '172.16.163.42', '1610509250195-93189', '2', '2021-01-13', '2021-01-13 03:40:47', '2021-01-13 03:40:47');
+INSERT INTO `WORKER_NODE` VALUES ('3586', '172.16.163.42', '1610509250945-62914', '2', '2021-01-13', '2021-01-13 03:40:47', '2021-01-13 03:40:47');
+INSERT INTO `WORKER_NODE` VALUES ('3587', '172.16.163.42', '1610509400636-6825', '2', '2021-01-13', '2021-01-13 03:43:17', '2021-01-13 03:43:17');
+INSERT INTO `WORKER_NODE` VALUES ('3588', '172.16.163.42', '1610509401371-81770', '2', '2021-01-13', '2021-01-13 03:43:18', '2021-01-13 03:43:18');
+INSERT INTO `WORKER_NODE` VALUES ('3589', '172.16.163.42', '1610509438921-25873', '2', '2021-01-13', '2021-01-13 03:43:55', '2021-01-13 03:43:55');
+INSERT INTO `WORKER_NODE` VALUES ('3590', '172.16.163.42', '1610509439600-10339', '2', '2021-01-13', '2021-01-13 03:43:56', '2021-01-13 03:43:56');
+INSERT INTO `WORKER_NODE` VALUES ('3591', '172.16.163.42', '1610509510221-7521', '2', '2021-01-13', '2021-01-13 03:45:07', '2021-01-13 03:45:07');
+INSERT INTO `WORKER_NODE` VALUES ('3592', '172.16.163.42', '1610509510963-48034', '2', '2021-01-13', '2021-01-13 03:45:07', '2021-01-13 03:45:07');
+INSERT INTO `WORKER_NODE` VALUES ('3593', '172.16.163.42', '1610509783564-65078', '2', '2021-01-13', '2021-01-13 03:49:40', '2021-01-13 03:49:40');
+INSERT INTO `WORKER_NODE` VALUES ('3594', '172.16.163.42', '1610509784279-30208', '2', '2021-01-13', '2021-01-13 03:49:41', '2021-01-13 03:49:41');
+INSERT INTO `WORKER_NODE` VALUES ('3595', '172.16.163.42', '1610509921590-56017', '2', '2021-01-13', '2021-01-13 03:51:58', '2021-01-13 03:51:58');
+INSERT INTO `WORKER_NODE` VALUES ('3596', '172.16.163.42', '1610509922549-58250', '2', '2021-01-13', '2021-01-13 03:51:59', '2021-01-13 03:51:59');
+INSERT INTO `WORKER_NODE` VALUES ('3597', '172.16.163.42', '1610510022962-29293', '2', '2021-01-13', '2021-01-13 03:53:39', '2021-01-13 03:53:39');
+INSERT INTO `WORKER_NODE` VALUES ('3598', '172.16.163.42', '1610510023808-50621', '2', '2021-01-13', '2021-01-13 03:53:40', '2021-01-13 03:53:40');
+INSERT INTO `WORKER_NODE` VALUES ('3599', '172.16.163.42', '1610514966491-73117', '2', '2021-01-13', '2021-01-13 05:16:03', '2021-01-13 05:16:03');
+INSERT INTO `WORKER_NODE` VALUES ('3600', '172.16.163.42', '1610514967376-34439', '2', '2021-01-13', '2021-01-13 05:16:04', '2021-01-13 05:16:04');
+INSERT INTO `WORKER_NODE` VALUES ('3601', '172.16.163.42', '1610516124706-55087', '2', '2021-01-13', '2021-01-13 05:35:21', '2021-01-13 05:35:21');
+INSERT INTO `WORKER_NODE` VALUES ('3602', '172.16.163.42', '1610516125575-55967', '2', '2021-01-13', '2021-01-13 05:35:22', '2021-01-13 05:35:22');
+INSERT INTO `WORKER_NODE` VALUES ('3603', '172.16.163.42', '1610518793398-25560', '2', '2021-01-13', '2021-01-13 06:19:50', '2021-01-13 06:19:50');
+INSERT INTO `WORKER_NODE` VALUES ('3604', '172.16.163.42', '1610518794210-36565', '2', '2021-01-13', '2021-01-13 06:19:51', '2021-01-13 06:19:51');
+INSERT INTO `WORKER_NODE` VALUES ('3605', '172.16.163.42', '1610519527647-26164', '2', '2021-01-13', '2021-01-13 06:32:04', '2021-01-13 06:32:04');
+INSERT INTO `WORKER_NODE` VALUES ('3606', '172.16.163.42', '1610519528571-38759', '2', '2021-01-13', '2021-01-13 06:32:05', '2021-01-13 06:32:05');
+INSERT INTO `WORKER_NODE` VALUES ('3607', '172.16.163.42', '1610520084310-22897', '2', '2021-01-13', '2021-01-13 06:41:21', '2021-01-13 06:41:21');
+INSERT INTO `WORKER_NODE` VALUES ('3608', '172.16.163.42', '1610520085093-85856', '2', '2021-01-13', '2021-01-13 06:41:22', '2021-01-13 06:41:22');
+INSERT INTO `WORKER_NODE` VALUES ('3609', '172.16.163.42', '1610520659364-19585', '2', '2021-01-13', '2021-01-13 06:50:56', '2021-01-13 06:50:56');
+INSERT INTO `WORKER_NODE` VALUES ('3610', '172.16.163.42', '1610520660216-39484', '2', '2021-01-13', '2021-01-13 06:50:57', '2021-01-13 06:50:57');
+INSERT INTO `WORKER_NODE` VALUES ('3611', '172.17.0.1', '1610521278510-84209', '2', '2021-01-13', '2021-01-13 07:01:18', '2021-01-13 07:01:18');
+INSERT INTO `WORKER_NODE` VALUES ('3612', '172.17.0.1', '1610521279699-88257', '2', '2021-01-13', '2021-01-13 07:01:19', '2021-01-13 07:01:19');
