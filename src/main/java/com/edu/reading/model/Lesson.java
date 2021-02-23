@@ -82,7 +82,7 @@ public class Lesson extends BaseModel implements Serializable {
      * @mbggenerated
      */
 	@ApiModelProperty(value = "绘本适用学期--0上学期 1下学期")
-    private Integer term;
+    private String term;
 
     /**
      * 是否发布 0.未发布 1已发布
@@ -90,7 +90,7 @@ public class Lesson extends BaseModel implements Serializable {
      * @mbggenerated
      */
 	@ApiModelProperty(value = "是否发布--0.未发布 1已发布")
-    private Integer published;
+    private String published;
 
     /**
      * 科目  1.数学 2.语文
@@ -98,7 +98,7 @@ public class Lesson extends BaseModel implements Serializable {
      * @mbggenerated
      */
     @ApiModelProperty(value = "课程学科--1.数学 2.语文")
-    private Integer subject;
+    private String subject;
 
     /**
      * 类型--1.课本 2绘本
@@ -106,7 +106,7 @@ public class Lesson extends BaseModel implements Serializable {
      * @mbggenerated
      */
     @ApiModelProperty(value = "课程类型--1.课本 2绘本")
-    private Integer type;
+    private String type;
 
     /**
      * 课本内容

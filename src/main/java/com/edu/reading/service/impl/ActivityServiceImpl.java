@@ -28,7 +28,7 @@ public class ActivityServiceImpl implements ActivityService {
 		ActivityExample ex = new ActivityExample();
 		ex.setOrderByClause("type, end_time desc");
 		// 已经发布未结束
-		ex.createCriteria().andPublishedEqualTo(1).andFinishedEqualTo(0);
+		ex.createCriteria().andPublishedEqualTo("1").andFinishedEqualTo("0");
 		return activityMapper.selectByExample(ex);
 	}
 

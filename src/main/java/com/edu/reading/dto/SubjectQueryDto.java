@@ -44,7 +44,7 @@ public class SubjectQueryDto implements Serializable {
 	 * 学期  0上学期 1下学期
 	 */
 	@ApiModelProperty(value = "学期--0上学期 1下学期", allowableValues = "range[0,1]", required = false)
-	private Integer term = -1;
+	private String term;
 	
 	//学校ID
 	@ApiModelProperty(hidden =  true)

@@ -158,7 +158,7 @@ public class ReadingServiceImpl implements ReadingService {
 			// 3.查询所在年级教材目录
 			StringBuffer sb = new StringBuffer();
 			sb.append("publisherId:" + subjectDto.getPublisherId()).append("(@)grade:" + subjectDto.getGrade());
-			if(subjectDto.getTerm() != -1) {
+			if(subjectDto.getTerm() != null) {
 				sb.append("(@)term:" + subjectDto.getTerm());
 			}
 			String[] filters = new String[] {sb.toString()};
@@ -213,8 +213,8 @@ public class ReadingServiceImpl implements ReadingService {
 			// 查询所在年级绘本
 			LessonExample le = new LessonExample();
 			Criteria cri = le.createCriteria();
-			cri.andSchoolIdEqualTo(schoolId).andGradeEqualTo(subjectDto.getGrade()).andPublishedEqualTo(1);
-			if(subjectDto.getTerm() != -1) {
+			cri.andSchoolIdEqualTo(schoolId).andGradeEqualTo(subjectDto.getGrade()).andPublishedEqualTo("1");
+			if(subjectDto.getTerm() != null) {
 				cri.andTermEqualTo(subjectDto.getTerm());
 			}
 			result.put("content", lessonMapper.selectByExample(le));			
@@ -239,7 +239,7 @@ public class ReadingServiceImpl implements ReadingService {
 	@Override
 	public List<Lesson> queryLesson(Long id) throws Exception {
 		LessonExample le = new LessonExample();
-		le.createCriteria().andPublishedEqualTo(1);
+		le.createCriteria().andPublishedEqualTo("1");
 		le.or().andIdEqualTo(id).andDirectoryIdEqualTo(id);
 		return lessonMapper.selectByExample(le);
 	}

@@ -34,7 +34,7 @@ public class School extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
-    private Integer type;
+    private String type;
 
     private String website;
 

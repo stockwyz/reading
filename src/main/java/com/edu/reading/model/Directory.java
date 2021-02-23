@@ -55,7 +55,7 @@ public class Directory extends BaseModel implements TreeNode, Serializable {
      *
      * @mbggenerated
      */
-    private Integer term;
+    private String term;
 
     /**
      * 1.英语 2.语文

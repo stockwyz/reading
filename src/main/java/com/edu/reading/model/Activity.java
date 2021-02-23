@@ -38,7 +38,7 @@ public class Activity extends BaseModel implements Serializable {
     private Long schoolId;
 
     /**
-     * 年级id
+     * 年级:1=一年级,2=二年级,3=三年级,4=四年级,5=五年级,6=六年级,7=七年级（初一）,8=八年级（初二）,9=9年级（初三）,10=高一,11=高二,12=高三
      *
      * @mbggenerated
      */
@@ -59,25 +59,25 @@ public class Activity extends BaseModel implements Serializable {
     private Date endTime;
 
     /**
-     * 是否结束 0.进行中 1.已完成
+     * 是否结束:0=进行中,1=已结束
      *
      * @mbggenerated
      */
-    private Integer finished;
+    private String finished;
 
     /**
-     * 类型 1.英语活动 2.语文活动
+     * 活动类型:1=英语,2=语文
      *
      * @mbggenerated
      */
-    private Integer type;
+    private String type;
 
     /**
-     * 是否发布 1.已发布 2.未发布
+     * 是否发布:1=已发布,2=未发布
      *
      * @mbggenerated
      */
-    private Integer published;
+    private String published;
 
     /**
      * 活动简介

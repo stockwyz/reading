@@ -42,7 +42,7 @@ public class UserLesson extends BaseModel implements Serializable {
      *
      * @mbggenerated
      */
-    private Integer type;
+    private String type;
 
     private static final long serialVersionUID = 1L;
 

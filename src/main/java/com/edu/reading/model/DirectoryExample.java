@@ -435,52 +435,62 @@ public class DirectoryExample {
             return (Criteria) this;
         }
 
-        public Criteria andTermEqualTo(Integer value) {
+        public Criteria andTermEqualTo(String value) {
             addCriterion("term =", value, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermNotEqualTo(Integer value) {
+        public Criteria andTermNotEqualTo(String value) {
             addCriterion("term <>", value, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermGreaterThan(Integer value) {
+        public Criteria andTermGreaterThan(String value) {
             addCriterion("term >", value, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermGreaterThanOrEqualTo(Integer value) {
+        public Criteria andTermGreaterThanOrEqualTo(String value) {
             addCriterion("term >=", value, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermLessThan(Integer value) {
+        public Criteria andTermLessThan(String value) {
             addCriterion("term <", value, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermLessThanOrEqualTo(Integer value) {
+        public Criteria andTermLessThanOrEqualTo(String value) {
             addCriterion("term <=", value, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermIn(List<Integer> values) {
+        public Criteria andTermLike(String value) {
+            addCriterion("term like", value, "term");
+            return (Criteria) this;
+        }
+
+        public Criteria andTermNotLike(String value) {
+            addCriterion("term not like", value, "term");
+            return (Criteria) this;
+        }
+
+        public Criteria andTermIn(List<String> values) {
             addCriterion("term in", values, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermNotIn(List<Integer> values) {
+        public Criteria andTermNotIn(List<String> values) {
             addCriterion("term not in", values, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermBetween(Integer value1, Integer value2) {
+        public Criteria andTermBetween(String value1, String value2) {
             addCriterion("term between", value1, value2, "term");
             return (Criteria) this;
         }
 
-        public Criteria andTermNotBetween(Integer value1, Integer value2) {
+        public Criteria andTermNotBetween(String value1, String value2) {
             addCriterion("term not between", value1, value2, "term");
             return (Criteria) this;
         }
